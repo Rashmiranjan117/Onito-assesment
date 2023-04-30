@@ -1,0 +1,45 @@
+$white:#F0F0F0;
+$yellow:#F9D949;
+$red:#F45050;
+$blue:#3C486B;
+
+.heading > p{
+    text-decoration: underline;
+}
+
+.form-page{
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: start;
+    padding: 3rem;
+    & form{
+        padding: 1rem 2rem;
+        border: 1px solid $blue;
+        width: 60%;
+        border-radius: 15px;
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+        & select{
+            cursor: pointer;
+        }
+        & button:hover {
+            cursor: pointer;
+            background-color: $white;
+            color: $red;
+        }
+        & button{
+            background-color: $red;
+            color: $white;
+            transition: 0.4s;
+        }
+        & .content{
+            display: grid;
+            grid-template-columns: repeat(3,1fr);
+            gap: 0.6rem;
+        }
+    }
+}
+
