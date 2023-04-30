@@ -102,7 +102,7 @@ const Form = () => {
               </Select>
               <Input
                 {...register("govtId")}
-                placeholder="Enter Mobile Number"
+                placeholder="Enter Govt. ID Number"
               />
             </FormControl>
           </Box>
