@@ -1,1 +1,12 @@
-/*# sourceMappingURL=index.css.map */
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,300;0,400;0,500;1,500;1,700&family=Poppins:wght@300;600&display=swap");
+* {
+  font-family: "Poppins", "Montserrat", sans-serif;
+}
+
+body, html {
+  margin: 0;
+  padding: 0;
+}
+body ::-webkit-scrollbar, html ::-webkit-scrollbar {
+  display: none;
+}/*# sourceMappingURL=index.css.map */

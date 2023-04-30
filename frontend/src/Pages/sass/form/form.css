@@ -1,0 +1,39 @@
+.heading > p {
+  text-decoration: underline;
+}
+
+.form-page {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: start;
+  padding: 3rem;
+}
+.form-page form {
+  padding: 1rem 2rem;
+  border: 1px solid #3C486B;
+  width: 60%;
+  border-radius: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+.form-page form select {
+  cursor: pointer;
+}
+.form-page form button:hover {
+  cursor: pointer;
+  background-color: #F0F0F0;
+  color: #F45050;
+}
+.form-page form button {
+  background-color: #F45050;
+  color: #F0F0F0;
+  transition: 0.4s;
+}
+.form-page form .content {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.6rem;
+}/*# sourceMappingURL=form.css.map */
