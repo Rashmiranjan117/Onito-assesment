@@ -9,8 +9,12 @@
   justify-content: center;
   align-items: start;
   padding: 3rem;
+  background: url("../../../assets/bcg.svg") no-repeat center center;
+  background-size: cover;
+  overflow: scroll;
 }
 .form-page form {
+  background-color: #F0F0F0;
   padding: 1rem 2rem;
   border: 1px solid #3C486B;
   width: 60%;

@@ -1,0 +1,13 @@
+$white:#F0F0F0;
+$yellow:#F9D949;
+$red:#F45050;
+$blue:#3C486B;
+
+.nav{
+    background-color: $blue;
+    color: $white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+}

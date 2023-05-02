@@ -2,6 +2,7 @@ $white:#F0F0F0;
 $yellow:#F9D949;
 $red:#F45050;
 $blue:#3C486B;
+$svg-path: '../../../assets/bcg.svg';
 
 .heading > p{
     text-decoration: underline;
@@ -14,7 +15,14 @@ $blue:#3C486B;
     justify-content: center;
     align-items: start;
     padding: 3rem;
+    background: url('#{$svg-path}') no-repeat center center;
+    background-size: cover;
+//     background-attachment: fixed;
+//     background-position: center;
+//   background-repeat: no-repeat;
+  overflow: scroll;
     & form{
+        background-color: $white;
         padding: 1rem 2rem;
         border: 1px solid $blue;
         width: 60%;

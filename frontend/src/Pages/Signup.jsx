@@ -72,10 +72,12 @@ const Signup = () => {
   return (
     <Box className="signup">
       <form onSubmit={handleSubmit(handleRegister)}>
+        <Heading>Signup</Heading>
         <FormControl>
           <Input
             {...register("email")}
             type="email"
+            className="inp"
             placeholder="Enter Email"
           />
         </FormControl>
@@ -83,10 +85,15 @@ const Signup = () => {
           <Input
             {...register("password")}
             type="password"
+            className="inp"
             placeholder="Enter Password"
           />
         </FormControl>
         <Button type="submit">Register</Button>
+        <Text>
+          Already have an account?{" "}
+          <span className="link" onClick={(e) => navigate("/login")}>Login</span>
+        </Text>
       </form>
     </Box>
   );
