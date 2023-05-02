@@ -6,7 +6,7 @@ import AllRoutes from "./Routes/AllRoutes";
 function App() {
   return (
     <Box className="App">
-      <Heading>App</Heading>
+      {/* <Heading>App</Heading> */}
       <Navbar />
       <AllRoutes />
     </Box>

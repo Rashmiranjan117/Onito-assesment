@@ -1,4 +1,4 @@
-.signup {
+.login {
   height: 100vh;
   width: 100%;
   display: flex;
@@ -8,8 +8,9 @@
   background: url("../../../assets/bcg.svg") no-repeat center center;
   background-size: cover;
 }
-.signup form {
+.login form {
   background-color: #F0F0F0;
+  background: #F0F0F0;
   width: 30%;
   border-radius: 0.8rem;
   display: flex;
@@ -19,28 +20,28 @@
   gap: 1rem;
   padding: 3rem 2rem;
 }
-.signup form button:hover {
+.login form button:hover {
   cursor: pointer;
   background-color: #F0F0F0;
   color: #F45050;
   border: 1px solid #F45050;
 }
-.signup form button {
+.login form button {
   background-color: #F45050;
   color: #F0F0F0;
   transition: 0.4s;
   width: 100%;
 }
-.signup form .link {
+.login form .link {
   color: blue;
   cursor: pointer;
 }
-.signup form .link:hover {
+.login form .link:hover {
   text-decoration: underline;
 }
-.signup form .inp:focus {
+.login form .inp:focus {
   outline: none;
   border-color: #3C486B !important;
   outline-color: none;
   box-shadow: 0 0 1px #3C486B;
-}/*# sourceMappingURL=signup.css.map */
+}/*# sourceMappingURL=login.css.map */
