@@ -5,4 +5,10 @@
   justify-content: space-between;
   align-items: center;
   padding: 1rem;
+}
+.nav .right-lg {
+  display: flex;
+  gap: 0.6rem;
+  justify-content: center;
+  align-items: center;
 }/*# sourceMappingURL=nav.css.map */
