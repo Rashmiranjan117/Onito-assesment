@@ -9,44 +9,58 @@ import {
   Button,
   Select,
   Text,
+  Heading,
+  useToast,
 } from "@chakra-ui/react";
 import * as Yup from "yup";
 import { useForm } from "react-hook-form";
 import "./sass/form/form.css";
 import axios from "axios";
+import Cookies from "universal-cookie";
+
+const PostData = (payload, token) => {
+  return axios({
+    method: "POST",
+    url: "http://localhost:8080/post/",
+    data: JSON.stringify(payload),
+    headers: {
+      Authorization: `${token}`,
+      "Content-Type": "application/json",
+    },
+  });
+};
 
 const schema = Yup.object().shape({
-  email: Yup.string().email().notRequired(),
+  email: Yup.string().email(),
   age: Yup.number().positive().integer().required(),
-  phoneNumber: Yup.string().length(10).notRequired(),
+  phoneNumber: Yup.string().length(10),
   name: Yup.string().required(),
   gender: Yup.string().required(),
-  idType: Yup.string().oneOf(["Aadhar", "PAN"]).notRequired(),
+  idType: Yup.string().oneOf(["Aadhar", "PAN"]),
   govtId: Yup.string().when("idType", {
     is: "Aadhar",
-    then: Yup.string()
-      .matches(/^[0-9]{12}$/, "Aadhar ID must be a 12-digit numeric string")
-      .notRequired(),
-    otherwise: Yup.string()
-      .matches(
-        /^[A-Z]{5}[0-9]{4}[A-Z]{1}$/,
-        "PAN ID must be a 10-digit alphanumeric string"
-      )
-      .notRequired(),
+    then: Yup.string().matches(
+      /^[0-9]{12}$/,
+      "Aadhar ID must be a 12-digit numeric string"
+    ),
+    otherwise: Yup.string().matches(
+      /^[A-Z]{5}[0-9]{4}[A-Z]{1}$/,
+      "PAN ID must be a 10-digit alphanumeric string"
+    ),
   }),
-  guardianName: Yup.string().notRequired(),
-  guardianEmail: Yup.string().email().notRequired(),
-  emergencyNumber: Yup.string().length(10).notRequired(),
-  address: Yup.string().notRequired(),
-  state: Yup.string().notRequired(),
-  city: Yup.string().notRequired(),
-  country: Yup.string().notRequired(),
-  pincode: Yup.number().integer().positive().notRequired(),
-  occupation: Yup.string().notRequired(),
-  religion: Yup.string().notRequired(),
-  martialStatus: Yup.string().notRequired(),
-  bloodGroup: Yup.string().notRequired(),
-  nationality: Yup.string().notRequired(),
+  guardianName: Yup.string(),
+  guardianEmail: Yup.string().email(),
+  emergencyNumber: Yup.string().length(10),
+  address: Yup.string(),
+  state: Yup.string(),
+  city: Yup.string(),
+  country: Yup.string(),
+  pincode: Yup.number().integer().positive(),
+  occupation: Yup.string(),
+  religion: Yup.string(),
+  martialStatus: Yup.string(),
+  bloodGroup: Yup.string(),
+  nationality: Yup.string(),
 });
 
 const Form = () => {
@@ -55,14 +69,91 @@ const Form = () => {
     handleSubmit,
     formState: { errors },
   } = useForm();
-  const [data, setData] = useState(null);
+  // const [data, setData] = useState(null);
+  const toast = useToast();
+  const cookies = new Cookies();
+  const token = cookies.get("token");
 
-  const handleSubmitReq = (data) => {
-    console.log(data);
+  const handleSubmitReq = async (data) => {
+    const { name, age, gender, phoneNumber, emergencyNumber } = data;
+    if (!name.length) {
+      toast({
+        title: `Name not detected.`,
+        status: "error",
+        duration: 5000,
+        isClosable: true,
+        position: "top",
+        description: "Please provide a Valid Name",
+      });
+      return;
+    }
+    if (!age.length) {
+      toast({
+        title: `Age Not Detected.`,
+        status: "error",
+        duration: 5000,
+        isClosable: true,
+        position: "top",
+        description: "Please provide a Valid Age",
+      });
+      return;
+    }
+    if (!gender.length) {
+      toast({
+        title: `Gender feild not detected.`,
+        status: "error",
+        duration: 5000,
+        isClosable: true,
+        position: "top",
+        description: "Please provide a Valid Gender",
+      });
+      return;
+    }
+    if (
+      (phoneNumber && phoneNumber.length !== 10) ||
+      (emergencyNumber && emergencyNumber.length !== 10)
+    ) {
+      toast({
+        title: `Invalid Phone-Number detected.`,
+        status: "error",
+        duration: 5000,
+        isClosable: true,
+        position: "top",
+        description: "Please provide a Valid Phone Number",
+      });
+      return;
+    }
+    try {
+      // console.log("ok", data);
+      PostData(data,token)
+        .then((res) => {
+          toast({
+            title: "Data added to server.",
+            duration: 5000,
+            isClosable: true,
+            status: "success",
+            description:`${res?.data?.msg}`
+          });
+        })
+        .catch((err) => {
+          toast({
+            title: "Error",
+            status: "error",
+            duration: 5000,
+            isClosable: true,
+            description: `${err}`,
+          });
+        });
+    } catch (err) {
+      console.error(err);
+    }
   };
   return (
     <Box className="form-page">
       <form onSubmit={handleSubmit(handleSubmitReq)}>
+        <Heading as="h2" size="lg" textAlign="center">
+          Form Details
+        </Heading>
         <Box className="personal-details">
           <Box className="heading">
             <Text>
@@ -70,7 +161,7 @@ const Form = () => {
             </Text>
           </Box>
           <Box className="content">
-            <FormControl isRequired>
+            <FormControl isRequired isInvalid={errors.name}>
               <FormLabel>Name</FormLabel>
               <Input
                 {...register("name")}
@@ -78,10 +169,10 @@ const Form = () => {
                 placeholder="Enter name"
               />
               {errors?.name && (
-                <FormErrorMessage>Name is required.</FormErrorMessage>
+                <FormErrorMessage>{errors?.name?.message}</FormErrorMessage>
               )}
             </FormControl>
-            <FormControl isRequired>
+            <FormControl isRequired isInvalid={errors.age}>
               <FormLabel>Age</FormLabel>
               <Input
                 {...register("age")}
@@ -89,18 +180,18 @@ const Form = () => {
                 placeholder="Enter Age"
               />
               {errors?.age && (
-                <FormErrorMessage>Age is required.</FormErrorMessage>
+                <FormErrorMessage>{errors?.age?.message}</FormErrorMessage>
               )}
             </FormControl>
-            <FormControl isRequired>
+            <FormControl isRequired isInvalid={errors.gender}>
               <FormLabel>Gender</FormLabel>
               <Select {...register("gender")}>
                 <option value="">Select Gender</option>
                 <option value="Male">Male</option>
                 <option value="Female">Female</option>
               </Select>
-              {errors?.name && (
-                <FormErrorMessage>Name is required.</FormErrorMessage>
+              {errors?.gender && (
+                <FormErrorMessage>{errors?.gender?.message}</FormErrorMessage>
               )}
             </FormControl>
             <FormControl>

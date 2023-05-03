@@ -10,4 +10,10 @@ $blue:#3C486B;
     justify-content: space-between;
     align-items: center;
     padding: 1rem;
+    & .right-lg{
+        display: flex;
+        gap: 0.6rem;
+        justify-content: center;
+        align-items: center;
+    }
 }
