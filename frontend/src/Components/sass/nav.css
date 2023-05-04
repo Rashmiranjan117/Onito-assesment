@@ -5,10 +5,16 @@
   justify-content: space-between;
   align-items: center;
   padding: 1rem;
+  position: sticky;
+  top: 0;
+  z-index: 100;
 }
 .nav .right-lg {
   display: flex;
-  gap: 0.6rem;
+  gap: 1.6rem;
   justify-content: center;
   align-items: center;
+}
+.nav .right-lg a:hover {
+  color: #F45050;
 }/*# sourceMappingURL=nav.css.map */

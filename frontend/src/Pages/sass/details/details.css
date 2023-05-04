@@ -1,0 +1,27 @@
+.details {
+  width: 100%;
+  height: 100vh;
+  background: url("../../../assets/bcg.svg") no-repeat center center;
+  background-size: cover;
+  transition: opacity 0.4s ease-in-out;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: #F0F0F0;
+}
+.details .table {
+  background-color: #F0F0F0;
+  max-width: 80%;
+  border-radius: 1rem;
+  color: #3C486B;
+  margin: 1rem;
+}
+.details .table .user-info {
+  cursor: pointer;
+  transition: 0.3s;
+}
+.details .table .user-info:hover {
+  background-color: #F45050;
+  color: #F0F0F0;
+}/*# sourceMappingURL=details.css.map */

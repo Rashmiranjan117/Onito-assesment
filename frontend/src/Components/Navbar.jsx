@@ -36,6 +36,7 @@ const Navbar = () => {
         </Heading>
       </Box>
       <Box className="right-lg">
+        {token && <Link to="/">Add Data</Link>}
         {token && <Link to="/details">Details</Link>}
         {token && <Logout />}
       </Box>

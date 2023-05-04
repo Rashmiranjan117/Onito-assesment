@@ -10,4 +10,8 @@ formRouter.get("/:id", formController.getOne);
 
 formRouter.post("/", formController.post);
 
+formRouter.delete("/:id", formController.delete);
+
+formRouter.patch("/:id", formController.patch);
+
 module.exports = { formRouter };

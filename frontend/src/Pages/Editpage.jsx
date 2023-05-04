@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Box,
   FormControl,
@@ -13,15 +13,27 @@ import {
   useToast,
 } from "@chakra-ui/react";
 import * as Yup from "yup";
-import { useForm } from "react-hook-form";
+import { useForm, Controller } from "react-hook-form";
 import "./sass/form/form.css";
 import axios from "axios";
 import Cookies from "universal-cookie";
+import { useLocation } from "react-router-dom";
 
-const PostData = (payload, token) => {
+const GetOne = (id, token) => {
   return axios({
-    method: "POST",
-    url: "http://localhost:8080/post/",
+    method: "GET",
+    url: `http://localhost:8080/post/${id}`,
+    headers: {
+      Authorization: `${token}`,
+      "Content-Type": "application/json",
+    },
+  });
+};
+
+const patchData = (payload, token, id) => {
+  return axios({
+    method: "PATCH",
+    url: `http://localhost:8080/post/${id}`,
     data: JSON.stringify(payload),
     headers: {
       Authorization: `${token}`,
@@ -63,16 +75,29 @@ const schema = Yup.object().shape({
   nationality: Yup.string(),
 });
 
-const Form = () => {
+const Editpage = () => {
   const {
     register,
     handleSubmit,
+    watch,
+    control,
     formState: { errors },
   } = useForm();
-  // const [data, setData] = useState(null);
   const toast = useToast();
   const cookies = new Cookies();
   const token = cookies.get("token");
+  const location = useLocation();
+  const [data, setData] = useState(null);
+
+  const handleGet = () => {
+    GetOne(location?.state, token)
+      .then((res) => {
+        setData(res.data.data);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  };
 
   const handleSubmitReq = async (data) => {
     const { name, age, gender, phoneNumber, emergencyNumber } = data;
@@ -125,14 +150,14 @@ const Form = () => {
     }
     try {
       // console.log("ok", data);
-      PostData(data,token)
+      patchData(data, token, location?.state)
         .then((res) => {
           toast({
             title: "Data added to server.",
             duration: 5000,
             isClosable: true,
             status: "success",
-            description:`${res?.data?.msg}`
+            description: `${res?.data?.msg}`,
           });
         })
         .catch((err) => {
@@ -148,11 +173,18 @@ const Form = () => {
       console.error(err);
     }
   };
+
+  
+
+  useEffect(() => {
+    handleGet();
+  }, []);
+  console.log(location, data);
   return (
     <Box className="form-page">
       <form onSubmit={handleSubmit(handleSubmitReq)}>
         <Heading as="h2" size="lg" textAlign="center">
-          Form Details
+          Edit Details
         </Heading>
         <Box className="personal-details">
           <Box className="heading">
@@ -163,9 +195,24 @@ const Form = () => {
           <Box className="content">
             <FormControl isRequired isInvalid={errors.name}>
               <FormLabel>Name</FormLabel>
+              {/* <Controller
+                control={control}
+                name="firstName"
+                render={({ field }) => (
+                  <Input
+                    {...register("name")}
+                    type="text"
+                    onChange={field.onChange}
+                    value={data?.name}
+                    placeholder="Enter name"
+                  />
+                )}
+              /> */}
               <Input
                 {...register("name")}
                 type="text"
+                onChange={(e) => watch("name", e.target.value)}
+                value={data?.name}
                 placeholder="Enter name"
               />
               {errors?.name && (
@@ -177,6 +224,8 @@ const Form = () => {
               <Input
                 {...register("age")}
                 type="number"
+                onChange={(e) => watch("age", e.target.value)}
+                value={data?.age}
                 placeholder="Enter Age"
               />
               {errors?.age && (
@@ -185,7 +234,11 @@ const Form = () => {
             </FormControl>
             <FormControl isRequired isInvalid={errors.gender}>
               <FormLabel>Gender</FormLabel>
-              <Select {...register("gender")}>
+              <Select
+                {...register("gender")}
+                onChange={(e) => watch("gender", e.target.value)}
+                value={data?.gender}
+              >
                 <option value="">Select Gender</option>
                 <option value="Male">Male</option>
                 <option value="Female">Female</option>
@@ -199,6 +252,8 @@ const Form = () => {
               <Input
                 {...register("email")}
                 type="email"
+                onChange={(e) => watch("email", e.target.value)}
+                value={data?.email}
                 placeholder="Enter Your Email"
               />
             </FormControl>
@@ -207,18 +262,26 @@ const Form = () => {
               <Input
                 {...register("phoneNumber")}
                 type="number"
+                onChange={(e) => watch("phoneNumber", e.target.value)}
+                value={data?.phoneNumber}
                 placeholder="Enter Mobile Number"
               />
             </FormControl>
             <FormControl>
               <FormLabel>Govt Issued ID</FormLabel>
-              <Select {...register("idType")}>
+              <Select
+                {...register("idType")}
+                onChange={(e) => watch("idType", e.target.value)}
+                value={data?.idType}
+              >
                 <option value="">ID type</option>
                 <option value="Aadhar">Aadhar</option>
                 <option value="PAN">PAN</option>
               </Select>
               <Input
                 {...register("govtId")}
+                onChange={(e) => watch("govtId", e.target.value)}
+                value={data?.govtId}
                 placeholder="Enter Govt. ID Number"
               />
               <FormHelperText>
@@ -239,6 +302,8 @@ const Form = () => {
               <FormLabel>Guardian Name</FormLabel>
               <Input
                 {...register("guardianName")}
+                onChange={(e) => watch("guardianName", e.target.value)}
+                value={data?.guardianName}
                 placeholder="Enter Guardian Name"
               />
             </FormControl>
@@ -246,6 +311,8 @@ const Form = () => {
               <FormLabel>Email</FormLabel>
               <Input
                 {...register("guardianEmail")}
+                onChange={(e) => watch("guardianEmail", e.target.value)}
+                value={data?.guardianEmail}
                 placeholder="Enter Guardian Email"
                 type="email"
               />
@@ -255,6 +322,8 @@ const Form = () => {
               <Input
                 type="number"
                 {...register("emergencyNumber")}
+                onChange={(e) => watch("emergencyNumber", e.target.value)}
+                value={data?.emergencyNumber}
                 placeholder="Enter Emergency No."
               />
             </FormControl>
@@ -270,23 +339,48 @@ const Form = () => {
           <Box className="content">
             <FormControl>
               <FormLabel>Address</FormLabel>
-              <Input {...register("address")} placeholder="Enter Address" />
+              <Input
+                {...register("address")}
+                onChange={(e) => watch("address", e.target.value)}
+                value={data?.address}
+                placeholder="Enter Address"
+              />
             </FormControl>
             <FormControl>
               <FormLabel>State</FormLabel>
-              <Input {...register("state")} placeholder="Enter state" />
+              <Input
+                {...register("state")}
+                onChange={(e) => watch("state", e.target.value)}
+                value={data?.state}
+                placeholder="Enter state"
+              />
             </FormControl>
             <FormControl>
               <FormLabel>City</FormLabel>
-              <Input {...register("city")} placeholder="Enter city" />
+              <Input
+                {...register("city")}
+                onChange={(e) => watch("city", e.target.value)}
+                value={data?.city}
+                placeholder="Enter city"
+              />
             </FormControl>
             <FormControl>
               <FormLabel>Country</FormLabel>
-              <Input {...register("country")} placeholder="Enter country" />
+              <Input
+                {...register("country")}
+                onChange={(e) => watch("country", e.target.value)}
+                value={data?.country}
+                placeholder="Enter country"
+              />
             </FormControl>
             <FormControl>
               <FormLabel>Pincode</FormLabel>
-              <Input {...register("pincode")} placeholder="Enter pincode" />
+              <Input
+                {...register("pincode")}
+                onChange={(e) => watch("pincode", e.target.value)}
+                value={data?.pincode}
+                placeholder="Enter pincode"
+              />
             </FormControl>
           </Box>
         </Box>
@@ -302,17 +396,26 @@ const Form = () => {
               <FormLabel>Occupation</FormLabel>
               <Input
                 {...register("occupation")}
+                onChange={(e) => watch("occupation", e.target.value)}
+                value={data?.occupation}
                 placeholder="Enter Occupation"
               />
             </FormControl>
             <FormControl>
               <FormLabel>Religion</FormLabel>
-              <Input {...register("religion")} placeholder="Enter religion" />
+              <Input
+                {...register("religion")}
+                onChange={(e) => watch("religion", e.target.value)}
+                value={data?.religion}
+                placeholder="Enter religion"
+              />
             </FormControl>
             <FormControl>
               <FormLabel>Martial Status</FormLabel>
               <Input
                 {...register("martialStatus")}
+                onChange={(e) => watch("martialStatus", e.target.value)}
+                value={data?.martialStatus}
                 placeholder="Enter Martial Status"
               />
             </FormControl>
@@ -320,6 +423,8 @@ const Form = () => {
               <FormLabel>Blood Group</FormLabel>
               <Input
                 {...register("bloodGroup")}
+                onChange={(e) => watch("bloodGroup", e.target.value)}
+                value={data?.bloodGroup}
                 placeholder="Enter BloodGroup"
               />
             </FormControl>
@@ -327,6 +432,8 @@ const Form = () => {
               <FormLabel>Nationality</FormLabel>
               <Input
                 {...register("nationality")}
+                onChange={(e) => watch("nationality", e.target.value)}
+                value={data?.nationality}
                 placeholder="Enter Nationality"
               />
             </FormControl>
@@ -338,4 +445,4 @@ const Form = () => {
   );
 };
 
-export default Form;
+export default Editpage;

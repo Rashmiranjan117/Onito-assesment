@@ -10,10 +10,16 @@ $blue:#3C486B;
     justify-content: space-between;
     align-items: center;
     padding: 1rem;
+    position: sticky;
+    top: 0;
+    z-index: 100;
     & .right-lg{
         display: flex;
-        gap: 0.6rem;
+        gap: 1.6rem;
         justify-content: center;
         align-items: center;
+        & a:hover{
+            color: $red;
+        }
     }
 }
