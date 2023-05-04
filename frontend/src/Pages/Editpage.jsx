@@ -174,6 +174,7 @@ const Editpage = () => {
     }
   };
 
+  
   useEffect(() => {
     handleGet();
   }, []);
