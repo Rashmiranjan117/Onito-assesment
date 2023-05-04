@@ -38,3 +38,27 @@ exports.post = async (req, res) => {
     });
   }
 };
+
+exports.delete = async (req, res) => {
+  let id = req.params.id;
+  try {
+    await FormModel.findByIdAndDelete({ _id: id });
+    res.send({ msg: "Data deleted Successfully" });
+  } catch (err) {
+    res.send({
+      msg: "Something went wrong while deleting data from server.",
+      err,
+    });
+  }
+};
+
+exports.patch = async (req, res) => {
+  let id = req.params.id;
+  let payload = req.body;
+  try {
+    await FormModel.findByIdAndUpdate({ _id: id }, payload);
+    res.send({ msg: "Data updated successfully" });
+  } catch (err) {
+    res.send({ msg: "Something went wrong while updating", err });
+  }
+};

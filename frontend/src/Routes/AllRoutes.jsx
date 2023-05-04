@@ -6,6 +6,7 @@ import Login from "../Pages/Login";
 import Form from "../Pages/Form";
 import Details from "../Pages/Details";
 import ProtectedRoute from "./ProtectedRoute";
+import Editpage from "../Pages/Editpage";
 
 const AllRoutes = () => {
   return (
@@ -26,6 +27,14 @@ const AllRoutes = () => {
         element={
           <ProtectedRoute>
             <Details />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/edit"
+        element={
+          <ProtectedRoute>
+            <Editpage />
           </ProtectedRoute>
         }
       />

@@ -11,6 +11,7 @@
   padding: 3rem;
   background: url("../../../assets/bcg.svg") no-repeat center center;
   background-size: cover;
+  transition: opacity 0.4s ease-in-out;
   overflow: scroll;
 }
 .form-page form {
