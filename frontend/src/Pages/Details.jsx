@@ -105,19 +105,24 @@ const Details = () => {
   }, []);
 
   const memoizedData = useMemo(() => data, [data]);
-  console.log(selectedRowData);
+  console.log(memoizedData);
   return (
     <Box className="details">
       <TableContainer>
         {(memoizedData && memoizedData?.length) > 0 ? (
-          <Table className="table">
+          <Table className="table" ref={tableRef}>
             <TableCaption color="whiteAlpha.800">Details</TableCaption>
             <Thead>
               <Tr>
-                <Th>Sr. No.</Th>
+                <Th>Serial. No.</Th>
+                <Th>Date</Th>
+                <Th>Id No.</Th>
                 <Th>Name</Th>
-                <Th>Age</Th>
-                <Th>Gender</Th>
+                <Th>Age/Gender</Th>
+                <Th>Mobile</Th>
+                <Th>Address</Th>
+                <Th>Guardian Details</Th>
+                <Th>Nationality</Th>
               </Tr>
             </Thead>
             <Tbody>
@@ -130,9 +135,18 @@ const Details = () => {
                       onClick={() => handleRowClick(el)}
                     >
                       <Td>{i + 1}</Td>
+                      <Td>{el?.createdAt}</Td>
+                      <Td>{el?._id}</Td>
                       <Td>{el?.name}</Td>
-                      <Td>{el?.age}</Td>
-                      <Td>{el?.gender}</Td>
+                      <Td>
+                        {el?.age}/{el?.gender[0]}
+                      </Td>
+                      <Td>{el && el?.phoneNumber ? el.phoneNumber : "---"}</Td>
+                      <Td>{el && el?.address ? el.address : "---"}</Td>
+                      <Td>
+                        {el && el?.guardianName ? el.guardianName : "---"}
+                      </Td>
+                      <Td>{el && el?.nationality ? el.nationality : "---"}</Td>
                     </Tr>
                   );
                 })}
@@ -172,12 +186,19 @@ const Details = () => {
             )}
           </ModalBody>
           <ModalFooter>
-            <Button
+            {/* <Button
               onClick={() => navigate("/edit", { state: selectedRowData?._id })}
             >
               Edit
-            </Button>
-            <Button onClick={() => handleDelete(selectedRowData?._id)}>
+            </Button> */}
+            <Button
+              className="delete-btn"
+              bgColor="red.500"
+              color="whiteAlpha.900"
+              _hover={{ borderColor: "red.500" }}
+              variant="outline"
+              onClick={() => handleDelete(selectedRowData?._id)}
+            >
               Delete
             </Button>
           </ModalFooter>

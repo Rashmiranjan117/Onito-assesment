@@ -195,7 +195,7 @@ const Editpage = () => {
           <Box className="content">
             <FormControl isRequired isInvalid={errors.name}>
               <FormLabel>Name</FormLabel>
-              {/* <Controller
+              <Controller
                 control={control}
                 name="firstName"
                 render={({ field }) => (
@@ -203,18 +203,18 @@ const Editpage = () => {
                     {...register("name")}
                     type="text"
                     onChange={field.onChange}
-                    value={data?.name}
+                    // value={data?.name}
                     placeholder="Enter name"
                   />
                 )}
-              /> */}
-              <Input
+              />
+              {/* <Input
                 {...register("name")}
                 type="text"
                 onChange={(e) => watch("name", e.target.value)}
                 value={data?.name}
                 placeholder="Enter name"
-              />
+              /> */}
               {errors?.name && (
                 <FormErrorMessage>{errors?.name?.message}</FormErrorMessage>
               )}
@@ -225,7 +225,7 @@ const Editpage = () => {
                 {...register("age")}
                 type="number"
                 onChange={(e) => watch("age", e.target.value)}
-                value={data?.age}
+                // value={data?.age}
                 placeholder="Enter Age"
               />
               {errors?.age && (
@@ -237,7 +237,7 @@ const Editpage = () => {
               <Select
                 {...register("gender")}
                 onChange={(e) => watch("gender", e.target.value)}
-                value={data?.gender}
+                // value={data?.gender}
               >
                 <option value="">Select Gender</option>
                 <option value="Male">Male</option>
@@ -253,7 +253,7 @@ const Editpage = () => {
                 {...register("email")}
                 type="email"
                 onChange={(e) => watch("email", e.target.value)}
-                value={data?.email}
+                // value={data?.email}
                 placeholder="Enter Your Email"
               />
             </FormControl>
@@ -263,7 +263,7 @@ const Editpage = () => {
                 {...register("phoneNumber")}
                 type="number"
                 onChange={(e) => watch("phoneNumber", e.target.value)}
-                value={data?.phoneNumber}
+                // value={data?.phoneNumber}
                 placeholder="Enter Mobile Number"
               />
             </FormControl>
@@ -272,7 +272,7 @@ const Editpage = () => {
               <Select
                 {...register("idType")}
                 onChange={(e) => watch("idType", e.target.value)}
-                value={data?.idType}
+                // value={data?.idType}
               >
                 <option value="">ID type</option>
                 <option value="Aadhar">Aadhar</option>
@@ -281,7 +281,7 @@ const Editpage = () => {
               <Input
                 {...register("govtId")}
                 onChange={(e) => watch("govtId", e.target.value)}
-                value={data?.govtId}
+                // value={data?.govtId}
                 placeholder="Enter Govt. ID Number"
               />
               <FormHelperText>
@@ -303,7 +303,7 @@ const Editpage = () => {
               <Input
                 {...register("guardianName")}
                 onChange={(e) => watch("guardianName", e.target.value)}
-                value={data?.guardianName}
+                // value={data?.guardianName}
                 placeholder="Enter Guardian Name"
               />
             </FormControl>
@@ -312,7 +312,7 @@ const Editpage = () => {
               <Input
                 {...register("guardianEmail")}
                 onChange={(e) => watch("guardianEmail", e.target.value)}
-                value={data?.guardianEmail}
+                // value={data?.guardianEmail}
                 placeholder="Enter Guardian Email"
                 type="email"
               />
@@ -323,7 +323,7 @@ const Editpage = () => {
                 type="number"
                 {...register("emergencyNumber")}
                 onChange={(e) => watch("emergencyNumber", e.target.value)}
-                value={data?.emergencyNumber}
+                // value={data?.emergencyNumber}
                 placeholder="Enter Emergency No."
               />
             </FormControl>
@@ -342,7 +342,7 @@ const Editpage = () => {
               <Input
                 {...register("address")}
                 onChange={(e) => watch("address", e.target.value)}
-                value={data?.address}
+                // value={data?.address}
                 placeholder="Enter Address"
               />
             </FormControl>
@@ -351,7 +351,7 @@ const Editpage = () => {
               <Input
                 {...register("state")}
                 onChange={(e) => watch("state", e.target.value)}
-                value={data?.state}
+                // value={data?.state}
                 placeholder="Enter state"
               />
             </FormControl>
@@ -360,7 +360,7 @@ const Editpage = () => {
               <Input
                 {...register("city")}
                 onChange={(e) => watch("city", e.target.value)}
-                value={data?.city}
+                // value={data?.city}
                 placeholder="Enter city"
               />
             </FormControl>
@@ -369,7 +369,7 @@ const Editpage = () => {
               <Input
                 {...register("country")}
                 onChange={(e) => watch("country", e.target.value)}
-                value={data?.country}
+                // value={data?.country}
                 placeholder="Enter country"
               />
             </FormControl>
@@ -378,7 +378,7 @@ const Editpage = () => {
               <Input
                 {...register("pincode")}
                 onChange={(e) => watch("pincode", e.target.value)}
-                value={data?.pincode}
+                // value={data?.pincode}
                 placeholder="Enter pincode"
               />
             </FormControl>
@@ -397,7 +397,7 @@ const Editpage = () => {
               <Input
                 {...register("occupation")}
                 onChange={(e) => watch("occupation", e.target.value)}
-                value={data?.occupation}
+                // value={data?.occupation}
                 placeholder="Enter Occupation"
               />
             </FormControl>
@@ -406,7 +406,7 @@ const Editpage = () => {
               <Input
                 {...register("religion")}
                 onChange={(e) => watch("religion", e.target.value)}
-                value={data?.religion}
+                // value={data?.religion}
                 placeholder="Enter religion"
               />
             </FormControl>
@@ -415,7 +415,7 @@ const Editpage = () => {
               <Input
                 {...register("martialStatus")}
                 onChange={(e) => watch("martialStatus", e.target.value)}
-                value={data?.martialStatus}
+                // value={data?.martialStatus}
                 placeholder="Enter Martial Status"
               />
             </FormControl>
@@ -424,7 +424,7 @@ const Editpage = () => {
               <Input
                 {...register("bloodGroup")}
                 onChange={(e) => watch("bloodGroup", e.target.value)}
-                value={data?.bloodGroup}
+                // value={data?.bloodGroup}
                 placeholder="Enter BloodGroup"
               />
             </FormControl>
@@ -433,7 +433,7 @@ const Editpage = () => {
               <Input
                 {...register("nationality")}
                 onChange={(e) => watch("nationality", e.target.value)}
-                value={data?.nationality}
+                // value={data?.nationality}
                 placeholder="Enter Nationality"
               />
             </FormControl>
