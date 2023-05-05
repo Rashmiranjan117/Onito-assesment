@@ -31,3 +31,14 @@ $svg-path: '../../../assets/bcg.svg';
         }
     }
 }
+
+.delete-btn{
+    background: $red;
+    color: $white;
+    transition: 0.35s;
+}
+.delete-btn:hover{
+    background-color: $white;
+    color: $red;
+    border-color: $red;
+}
