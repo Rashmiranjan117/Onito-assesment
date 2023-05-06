@@ -14,10 +14,13 @@ import {
   Button,
   useToast,
   Heading,
+  Hide,
 } from "@chakra-ui/react";
 import { Link, useNavigate } from "react-router-dom";
 import Logout from "./Logout";
 import Cookies from "universal-cookie";
+import { AiOutlineFileAdd } from "react-icons/ai";
+import { BsDatabaseCheck } from "react-icons/bs";
 
 const Navbar = () => {
   const cookie = new Cookies();
@@ -36,8 +39,24 @@ const Navbar = () => {
         </Heading>
       </Box>
       <Box className="right-lg">
-        {token && <Link to="/">Add Data</Link>}
-        {token && <Link to="/details">Details</Link>}
+        {token && (
+          <Link to="/">
+            <Hide below="md">
+              <span>Add Data</span>
+            </Hide>
+
+            <AiOutlineFileAdd />
+          </Link>
+        )}
+        {token && (
+          <Link to="/details">
+            <Hide below="md">
+              <span>Details</span>
+            </Hide>
+
+            <BsDatabaseCheck />
+          </Link>
+        )}
         {token && <Logout />}
       </Box>
     </Box>

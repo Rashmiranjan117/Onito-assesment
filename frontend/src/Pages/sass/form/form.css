@@ -41,4 +41,27 @@
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 0.6rem;
+}
+
+@media all and (max-width: 1024px) and (min-width: 768px) {
+  .form-page form {
+    width: 80%;
+    border-radius: 12px;
+    gap: 1.2rem;
+  }
+  .form-page form .content {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media all and (max-width: 767px) and (min-width: 200px) {
+  .form-page form {
+    width: 98%;
+    border-radius: 12px;
+    gap: 1.2rem;
+  }
+  .form-page form .content {
+    display: flex;
+    flex-direction: column;
+  }
 }/*# sourceMappingURL=form.css.map */

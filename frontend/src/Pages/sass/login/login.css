@@ -44,4 +44,15 @@
   border-color: #3C486B !important;
   outline-color: none;
   box-shadow: 0 0 1px #3C486B;
+}
+
+@media all and (max-width: 1024px) and (min-width: 768px) {
+  .login form {
+    width: 60%;
+  }
+}
+@media all and (max-width: 767px) and (min-width: 200px) {
+  .login form {
+    width: 80%;
+  }
 }/*# sourceMappingURL=login.css.map */
