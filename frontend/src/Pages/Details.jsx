@@ -33,7 +33,7 @@ import "./sass/details/details.css";
 const GetData = (token) => {
   return axios({
     method: "GET",
-    url: "http://localhost:8080/post/",
+    url: "https://rich-plum-sea-lion-veil.cyclic.app/post/",
     headers: {
       Authorization: `${token}`,
       "Content-Type": "application/json",
@@ -44,7 +44,7 @@ const GetData = (token) => {
 const DeleteData = (token, id) => {
   return axios({
     method: "DELETE",
-    url: `http://localhost:8080/post/${id}`,
+    url: `https://rich-plum-sea-lion-veil.cyclic.app/post/${id}`,
     headers: {
       Authorization: `${token}`,
       "Content-Type": "application/json",

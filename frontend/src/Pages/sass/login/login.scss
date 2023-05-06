@@ -55,3 +55,19 @@ $svg-path: '../../../assets/bcg.svg';
         }
     }
 }
+
+@media all and (max-width:1024px) and (min-width:768px){
+    .login{
+        & form {
+            width: 60%;
+        }
+    }
+}
+
+@media all and (max-width:767px) and (min-width:200px){
+    .login{
+        & form {
+            width: 80%;
+        }
+    }
+}

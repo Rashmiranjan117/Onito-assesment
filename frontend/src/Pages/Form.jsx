@@ -21,7 +21,7 @@ import Cookies from "universal-cookie";
 const PostData = (payload, token) => {
   return axios({
     method: "POST",
-    url: "http://localhost:8080/post/",
+    url: "https://rich-plum-sea-lion-veil.cyclic.app/post/",
     data: JSON.stringify(payload),
     headers: {
       Authorization: `${token}`,

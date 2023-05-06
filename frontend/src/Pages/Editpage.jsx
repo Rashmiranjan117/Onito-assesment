@@ -22,7 +22,7 @@ import { useLocation } from "react-router-dom";
 const GetOne = (id, token) => {
   return axios({
     method: "GET",
-    url: `http://localhost:8080/post/${id}`,
+    url: `https://rich-plum-sea-lion-veil.cyclic.app/post/${id}`,
     headers: {
       Authorization: `${token}`,
       "Content-Type": "application/json",
@@ -33,7 +33,7 @@ const GetOne = (id, token) => {
 const patchData = (payload, token, id) => {
   return axios({
     method: "PATCH",
-    url: `http://localhost:8080/post/${id}`,
+    url: `https://rich-plum-sea-lion-veil.cyclic.app/post/${id}`,
     data: JSON.stringify(payload),
     headers: {
       Authorization: `${token}`,

@@ -23,7 +23,7 @@ const schema = Yup.object().shape({
 });
 
 const Register = (payload) => {
-  return axios.post("http://localhost:8080/auth/register", payload);
+  return axios.post("https://rich-plum-sea-lion-veil.cyclic.app/auth/register", payload);
 };
 
 const Signup = () => {

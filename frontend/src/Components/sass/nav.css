@@ -15,6 +15,35 @@
   justify-content: center;
   align-items: center;
 }
+.nav .right-lg a {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  align-items: center;
+}
 .nav .right-lg a:hover {
   color: #F45050;
+}
+
+@media all and (max-width: 1024px) and (min-width: 768px) {
+  .nav {
+    padding: 1rem;
+  }
+  .nav .right-lg {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1.3rem;
+  }
+}
+@media all and (max-width: 767px) and (min-width: 200px) {
+  .nav {
+    padding: 1rem;
+  }
+  .nav .right-lg {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+  }
 }/*# sourceMappingURL=nav.css.map */
